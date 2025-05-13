@@ -1,0 +1,141 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Кнопка настроек */
+.settings-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-size: 30px;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.settings-button:hover {
+  background-color: #3a79d8;
+  transform: scale(1.1);
+}
+
+/* Панель настроек */
+.settings-panel {
+  position: fixed;
+  bottom: 70px;
+  left: 20px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  display: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+.settings-panel h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.settings-panel button {
+  background-color: #104eaa;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.settings-panel button:hover {
+  background-color: #3a79d8;
+}
+
+/* Основное приложение */
+.app-container {
+  background-color: #1e1e1e;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 1000px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Контейнер для букв */
+.alphabet-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Буквы */
+.letter {
+  background-color: #10366b;
+  color: #ffffff;
+  font-size: 28px;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.letter:hover {
+  background-color: #3a79d8;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* Светлая тема */
+body.light-theme {
+  background-color: #f0f0f0;
+  color: #121212;
+}
+
+body.light-theme .letter {
+  background-color: #007bb5;
+}
+
+body.light-theme .settings-button {
+  background-color: #ffffff;
+  color: #121212;
+}
+
+body.light-theme .settings-button:hover {
+  background-color: #3a79d8;
+  transform: scale(1.1);
+}
+
+body.light-theme .settings-panel {
+  background-color: #ffffff;
+  color: #121212;
+}
+
+body.light-theme .settings-panel button {
+  background-color: #104eaa;
+  color: #ffffff;
+}
