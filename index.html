@@ -15,7 +15,15 @@
   <div class="settings-button" id="settingsButton">⚙️</div>
   <div class="settings-panel" id="settingsPanel">
     <h3>Налаштування</h3>
-    <button id="themeToggle">Змінити тему</button>
+    <div class="settings-option">
+      <label for="themeToggle">Тема:</label>
+      <button id="themeToggle">Змінити тему</button>
+    </div>
+    <div class="settings-option">
+      <label for="volumeSlider">Гучність:</label>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+      <span id="volumeValue">100%</span>
+    </div>
   </div>
 
   <script src="script.js"></script>

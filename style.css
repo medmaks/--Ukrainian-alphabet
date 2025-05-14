@@ -8,6 +8,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Кнопка настроек */
@@ -22,7 +23,8 @@ body {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s, color 0.3s;
+  z-index: 100;
 }
 
 .settings-button:hover {
@@ -41,11 +43,34 @@ body {
   border-radius: 15px;
   display: none;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+  z-index: 99;
+  min-width: 250px;
+  animation: fadeIn 0.3s ease-in-out;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .settings-panel h3 {
   margin-top: 0;
   margin-bottom: 15px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.settings-option {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-option label {
+  font-weight: bold;
+  color: #cccccc;
 }
 
 .settings-panel button {
@@ -56,10 +81,64 @@ body {
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
 .settings-panel button:hover {
   background-color: #3a79d8;
+  transform: translateY(-2px);
+}
+
+.settings-panel button:active {
+  transform: translateY(0);
+}
+
+/* Слайдер громкості */
+#volumeSlider {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #333;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #3a79d8;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#volumeSlider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #3a79d8;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+  background: #4e8ae8;
+}
+
+#volumeSlider::-moz-range-thumb:hover {
+  background: #4e8ae8;
+}
+
+#volumeValue {
+  display: inline-block;
+  width: 45px;
+  text-align: right;
+  margin-top: 5px;
 }
 
 /* Основное приложение */
@@ -71,6 +150,7 @@ body {
   width: 90%;
   max-width: 1000px;
   text-align: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
@@ -78,6 +158,7 @@ h1 {
   margin-bottom: 30px;
   color: #ffffff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  transition: color 0.3s, text-shadow 0.3s;
 }
 
 /* Контейнер для букв */
@@ -100,8 +181,9 @@ h1 {
   justify-content: center;
   border-radius: 15px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s, color 0.3s;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  user-select: none;
 }
 
 .letter:hover {
@@ -110,32 +192,85 @@ h1 {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
 }
 
+.letter:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 /* Светлая тема */
 body.light-theme {
   background-color: #f0f0f0;
   color: #121212;
 }
 
+body.light-theme .app-container {
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+body.light-theme h1 {
+  color: #121212;
+  text-shadow: none;
+}
+
 body.light-theme .letter {
   background-color: #007bb5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 body.light-theme .settings-button {
   background-color: #ffffff;
   color: #121212;
-}
-
-body.light-theme .settings-button:hover {
-  background-color: #3a79d8;
-  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 body.light-theme .settings-panel {
   background-color: #ffffff;
   color: #121212;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-body.light-theme .settings-panel button {
-  background-color: #104eaa;
-  color: #ffffff;
+body.light-theme .settings-panel h3 {
+  border-color: #ddd;
+}
+
+body.light-theme .settings-option label {
+  color: #444444;
+}
+
+body.light-theme #volumeSlider {
+  background: #dddddd;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  .letter {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 15px;
+  }
+  
+  .alphabet-container {
+    gap: 10px;
+  }
+  
+  .letter {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
 }
