@@ -3,7 +3,7 @@ class Letter {
     this.symbol = symbol;
     this.soundFile = soundFile;
   }
-  
+   
   render() {
     const div = document.createElement('div');
     div.className = 'letter';
@@ -18,7 +18,7 @@ class Letter {
     audio.play();
   }
 }
-
+// Класс для управления алфавитом
 class Alphabet {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
@@ -32,7 +32,7 @@ class Alphabet {
   render() {
     this.container.innerHTML = ''; // Очищаем контейнер перед рендерингом
     this.letters.forEach(letter => {
-      this.container.appendChild(letter.render());
+      this.container.appendChild(letter.render()); 
     });
   }
 }
@@ -113,7 +113,7 @@ class SettingsPanel {
 
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
-  // Создаем алфавит
+  // "АБЕТКА" - создание алфавита
   const alphabet = new Alphabet('alphabet');
   const lettersData = [
     { symbol: 'А', sound: 'sound/а.mp3' },
