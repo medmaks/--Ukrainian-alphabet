@@ -1,3 +1,4 @@
+// Клас для створення літери
 class Letter {
   constructor(symbol, soundFile) {
     this.symbol = symbol;
@@ -11,14 +12,14 @@ class Letter {
     div.addEventListener('click', () => this.playSound());
     return div;
   }
-  // Метод для воспроизведения звука
+  // Метод для відтворення звуку
   playSound() {
     const audio = new Audio(this.soundFile);
     audio.volume = VolumeManager.getVolume();
     audio.play();
   }
 }
-// Класс для управления алфавитом
+// Клас для керування алфавітом
 class Alphabet {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
@@ -30,29 +31,29 @@ class Alphabet {
   }
   
   render() {
-    this.container.innerHTML = ''; // Очищаем контейнер перед рендерингом
+    this.container.innerHTML = ''; // Очищаємо контейнер перед рендерингом
     this.letters.forEach(letter => {
       this.container.appendChild(letter.render()); 
     });
   }
 }
-
+// Клас для керування темою
 class ThemeManager {
   static initialize() {
-    // Проверка сохраненной темы в localStorage
+   // Перевірка збереженої теми в localStorage
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
       document.body.classList.add('light-theme');
     }
     
-    // Настройка обработчика события для кнопки темы
+    // Налаштування обробника події для кнопки теми
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => this.toggleTheme());
   }
   
   static toggleTheme() {
     document.body.classList.toggle('light-theme');
-    // Сохраняем выбор темы в localStorage
+    // Зберігаємо вибір теми в localStorage
     const isLightTheme = document.body.classList.contains('light-theme');
     localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
     
@@ -61,12 +62,12 @@ class ThemeManager {
     themeToggle.textContent = isLightTheme ? 'Темна тема' : 'Світла тема';
   }
 }
-
+// Клас для керування гучністю
 class VolumeManager {
   static volume = 1.0;
   
   static initialize() {
-    // Проверка сохраненного уровня громкости в localStorage
+    // Перевірка збереженого рівня гучності в localStorage
     const savedVolume = localStorage.getItem('volume');
     if (savedVolume !== null) {
       this.volume = parseFloat(savedVolume);
@@ -75,11 +76,11 @@ class VolumeManager {
     const volumeSlider = document.getElementById('volumeSlider');
     const volumeValue = document.getElementById('volumeValue');
     
-    // Устанавливаем начальное значение ползунка
+    // Встановлюємо початкове значення повзунка
     volumeSlider.value = this.volume;
     volumeValue.textContent = `${Math.round(this.volume * 100)}%`;
     
-    // Обработчик изменения громкости
+    // Обробник зміни гучності
     volumeSlider.addEventListener('input', (e) => {
       this.volume = parseFloat(e.target.value);
       volumeValue.textContent = `${Math.round(this.volume * 100)}%`;
@@ -102,7 +103,7 @@ class SettingsPanel {
       settingsPanel.style.display = isVisible ? 'none' : 'block';
     });
     
-    // Закрытие панели при клике вне нее
+    // Закриття панелі при натисканні поза нею
     document.addEventListener('click', (e) => {
       if (!settingsPanel.contains(e.target) && e.target !== settingsButton) {
         settingsPanel.style.display = 'none';
@@ -111,9 +112,9 @@ class SettingsPanel {
   }
 }
 
-// Инициализация приложения
+// Ініціалізація програми
 document.addEventListener('DOMContentLoaded', () => {
-  // "АБЕТКА" - создание алфавита
+  // "АБЕТКА" - створення алфавіту
   const alphabet = new Alphabet('alphabet');
   const lettersData = [
     { symbol: 'А', sound: 'sound/а.mp3' },
@@ -158,12 +159,25 @@ document.addEventListener('DOMContentLoaded', () => {
   
   alphabet.render();
   
-  // Инициализируем менеджеры
+  // Ініціалізуємо менеджери
   ThemeManager.initialize();
   VolumeManager.initialize();
   SettingsPanel.initialize();
   
-  // Устанавливаем правильный текст кнопки темы
+  // Встановлюємо правильний текст кнопки теми
   const themeToggle = document.getElementById('themeToggle');
   themeToggle.textContent = document.body.classList.contains('light-theme') ? 'Темна тема' : 'Світла тема';
+  
+  // Додаємо функціональність для кнопки "Випадкова літера"
+  const randomLetterButton = document.getElementById('randomLetterButton');
+  randomLetterButton.addEventListener('click', () => {
+    // Вибираємо випадкову літеру з масиву
+    const randomIndex = Math.floor(Math.random() * lettersData.length);
+    const randomLetter = lettersData[randomIndex];
+    
+    // Відтворюємо звук цієї літери
+    const audio = new Audio(randomLetter.sound);
+    audio.volume = VolumeManager.getVolume();
+    audio.play();
+  });
 });
