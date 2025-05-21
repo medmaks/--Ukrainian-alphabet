@@ -5,7 +5,7 @@ class AppConfig {
   constructor() {
     if (AppConfig.instance) return AppConfig.instance;
     this.volume = 1.0;
-    this.theme = 'dark';
+    this.theme = localStorage.getItem('theme') || 'dark'; // Загружаем тему из localStorage при создании
     AppConfig.instance = this;
   }
 }
@@ -197,6 +197,11 @@ class ThemeManager {
     };
   }
   
+  // Підтвердження теми
+  applyCurrentTheme() {
+    this.themes[this.config.theme].apply();
+  }
+  
   toggle() {
     const newTheme = this.config.theme === 'dark' ? 'light' : 'dark';
     this.themes[newTheme].apply();
@@ -309,6 +314,9 @@ class AlphabetApp {
     
     // Команди
     this.commands.set('random', new PlayRandomCommand(this.alphabet));
+    
+    // Применяем сохраненную тему
+    this.themeManager.applyCurrentTheme();
     
     // Ініціалізація менеджерів
     SettingsPanel.initialize();
