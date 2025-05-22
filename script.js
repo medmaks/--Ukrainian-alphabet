@@ -5,7 +5,7 @@ class AppConfig {
   constructor() {
     if (AppConfig.instance) return AppConfig.instance;
     this.volume = 1.0;
-    this.theme = localStorage.getItem('theme') || 'dark'; // Загружаем тему из localStorage при создании
+    this.theme = localStorage.getItem('theme') || 'dark'; // Загружаємо з localStorage
     AppConfig.instance = this;
   }
 }
@@ -31,7 +31,7 @@ class Letter extends AudioElement {
     this.#symbol = symbol;
     this.next = null; // Для зв'язного списку
   }
-  
+    
   get symbol() { return this.#symbol; } // Геттер
   
   playSound() {
